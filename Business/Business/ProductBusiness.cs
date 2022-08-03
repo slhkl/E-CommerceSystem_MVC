@@ -34,15 +34,16 @@ namespace Business.Business
             return new ProductDtoForUpdate()
             {
                 ProductId = product.ProductId,
-                ProductImage = product.ProductImage,
+                ProductImageBase4 = product.ProductImageBase64,
                 ProductStock = product.ProductStock,
                 ProductDescription = product.ProductDescription,
                 ProductName = product.ProductName,
                 CategoryId = product.CategoryId,
+                ProductPrice = product.ProductPrice.ToString(),
                 LastUpdatedTime = product.LastUpdatedTime
             };
         }
-      
+
         public void Add(ProductDtoForAdd productDto)
         {
             Product product = new Product()
@@ -51,12 +52,13 @@ namespace Business.Business
                 ProductName = productDto.ProductName,
                 ProductDescription = productDto.ProductDescription,
                 ProductStock = productDto.ProductStock,
-                CategoryId = productDto.CategoryId
+                CategoryId = productDto.CategoryId,
+                ProductPrice = double.Parse(productDto.ProductPrice.Replace('.', ','))
             };
             using (var ms = new MemoryStream())
             {
-                productDto.ProductFile.CopyTo(ms);
-                product.ProductImage = ms.ToArray();
+                productDto.ProductFile?.CopyTo(ms);
+                product.ProductImageBase64 = Convert.ToBase64String(ms.ToArray());
             }
             _productService.Add(product);
         }
@@ -69,15 +71,16 @@ namespace Business.Business
             product.ProductName = productDto.ProductName;
             product.CategoryId = productDto.CategoryId;
             product.ProductStock = productDto.ProductStock;
+            product.ProductPrice = double.Parse(productDto.ProductPrice.Replace('.', ','));
             product.LastUpdatedTime = DateTime.Now;
 
             if (productDto.ProductFile == null)
-                product.ProductImage = Get(productDto.ProductId).ProductImage;
+                product.ProductImageBase64 = Get(productDto.ProductId).ProductImageBase64;
             else
                 using (var ms = new MemoryStream())
                 {
                     productDto.ProductFile.CopyTo(ms);
-                    product.ProductImage = ms.ToArray();
+                    product.ProductImageBase64 = Convert.ToBase64String(ms.ToArray());
                 }
             _productService.Update(x => x.Id == product.Id, product);
         }

@@ -11,7 +11,8 @@ namespace Data.Models
         public string? ProductName { get; set; }
         public string? ProductDescription { get; set; }
         public int ProductStock { get; set; }
-        public byte[]? ProductImage { get; set; }
+        public double ProductPrice { get; set; }
+        public string? ProductImageBase64 { get; set; }
         public string? CategoryId { get; set; }
         public DateTime? LastUpdatedTime { get; set; } = DateTime.Now;
     }

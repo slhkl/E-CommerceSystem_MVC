@@ -7,9 +7,9 @@
             <h2 class="text-primary">Update Product</h2>
         </div>
         <div asp-validation-summary="All"></div>
-       <div class="mb-3">
+        <div class="mb-3">
             <label asp-for="ProductFile"></label>
-            <img class="form-control" style="width:500px;height:500px" src="data:image/png;base64,@Convert.ToBase64String(Model.ProductImage)" />
+            <img asp-for="ProductImageBase4" class="form-control" style="width:500px;height:500px" src="data:image/png;base64,@Model.ProductImageBase4" />
             <input type="file" asp-for="ProductFile" class="form-control" />
             <span asp-validation-for="ProductFile" class="text-danger"></span>
         </div>
@@ -28,6 +28,11 @@
             <label asp-for="ProductDescription"></label>
             <input asp-for="ProductDescription" class="form-control" />
             <span asp-validation-for="ProductDescription" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ProductPrice"></label>
+            <input asp-for="ProductPrice" class="form-control" />
+            <span asp-validation-for="ProductPrice" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="ProductStock"></label>

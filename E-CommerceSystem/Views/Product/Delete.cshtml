@@ -11,8 +11,8 @@
             <h2 class="text-primary">Delete Product</h2>
         </div>
         <div class="mb-3">
-            <label asp-for="ProductImage"></label>
-            <img class="form-control" style="width:500px;height:500px" src="data:image/png;base64,@Convert.ToBase64String(Model.ProductImage)">
+            <label asp-for="ProductImageBase64"></label>
+            <img class="form-control" style="width:500px;height:500px" src="data:image/png;base64,@Model.ProductImageBase64">
         </div>
         <div class="mb-3">
             <label asp-for="ProductId"></label>
@@ -25,6 +25,10 @@
         <div class="mb-3">
             <label asp-for="ProductDescription"></label>
             <input asp-for="ProductDescription" disabled class="form-control" />
+        </div>
+         <div class="mb-3">
+            <label asp-for="ProductPrice"></label>
+            <input asp-for="ProductPrice" disabled class="form-control" />
         </div>
         <div class="mb-3">
             <label asp-for="ProductStock"></label>

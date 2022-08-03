@@ -8,8 +8,9 @@ namespace Data.Dto
         public string? ProductName { get; set; }
         public string? ProductDescription { get; set; }
         public int ProductStock { get; set; }
+        public string? ProductPrice { get; set; }
         public IFormFile? ProductFile { get; set; }
-        public byte[]? ProductImage { get; set; }
+        public string? ProductImageBase4 { get; set; }
         public string? CategoryId { get; set; }
         public DateTime? LastUpdatedTime { get; set; }
     }

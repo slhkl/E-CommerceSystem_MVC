@@ -20,6 +20,8 @@ namespace E_CommerceSystem.Validation
             if (product.ProductStock < 0)
                 modelState.AddModelError("productStock", "Product stock cant be under 0");
 
+            if (!double.TryParse(product.ProductPrice, out double value))
+                modelState.AddModelError("productPrice", "Product price is invalid must be float");
             //if (productBusiness.Get(cate) == null)
             //    modelState.AddModelError("categoryId", "There isn't a category please check category id");
         }
