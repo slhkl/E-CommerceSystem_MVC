@@ -5,18 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_CommerceSystem.Controllers
 {
-    public class CategoryController : Controller
+    public class CustomerController : Controller
     {
-        CategoryBusiness _categoryBusiness;
-
-        public CategoryController()
+        CustomerBusiness _customerBusiness;
+        public CustomerController()
         {
-            _categoryBusiness = new CategoryBusiness();
+            _customerBusiness = new CustomerBusiness();
         }
 
         public IActionResult Index()
         {
-            return View(_categoryBusiness.Get());
+            return View(_customerBusiness.Get());
         }
 
         [HttpGet, ActionName("Add")]
@@ -27,43 +26,43 @@ namespace E_CommerceSystem.Controllers
 
         [HttpPost, ActionName("Add")]
         [ValidateAntiForgeryToken]
-        public IActionResult AddCategoryToDatabase(CategoryDto category)
+        public IActionResult AddCustomerToDatabase(CustomerDto customer)
         {
-            CategoryValidator.ValidateCategoryForAdd(_categoryBusiness, category, ModelState);
+            CustomerValidator.ValidateCustomerForAdd(_customerBusiness, customer, ModelState);
 
             if(ModelState.IsValid)
             {
-                _categoryBusiness.Add(category);
+                _customerBusiness.Add(customer);
                 return RedirectToAction("Index");
             }
             return View();
         }
 
         [HttpGet, ActionName("Update")]
-        public IActionResult PageContentForUpdate(string id)
+        public IActionResult PageContentforUpdate(string id)
         {
-            return View(_categoryBusiness.GetDto(id));
+            return View(_customerBusiness.GetDto(id));
         }
 
         [HttpPost, ActionName("Update")]
         [ValidateAntiForgeryToken]
-        public IActionResult UpdateToDatabase(CategoryDto category)
+        public IActionResult UpdateToDatase(CustomerDto customer)
         {
-            _categoryBusiness.Update(category);
+            _customerBusiness.Update(customer);
             return RedirectToAction("Index");
         }
 
         [HttpGet, ActionName("Delete")]
-        public IActionResult PageContentDelete(string id)
+        public IActionResult PageContentForDelete(string id)
         {
-            return View(_categoryBusiness.Get(id));
+            return View(_customerBusiness.Get(id));
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteFormDatabase(string id)
+        public IActionResult DeleteFromDatabase(string id)
         {
-            _categoryBusiness.Delete(id);
+            _customerBusiness.Delete(id);
             return RedirectToAction("Index");
         }
     }
