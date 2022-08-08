@@ -23,9 +23,9 @@ namespace Business.Business
             return _productService.Get(x => x.Id == id);
         }
 
-        public Product Get(int ProductId)
+        public Product Get(int productId)
         {
-            return _productService.Get(x => x.ProductId == ProductId);
+            return _productService.Get(x => x.ProductId == productId);
         }
 
         public ProductDtoForUpdate GetDtoForUpdate(string id)

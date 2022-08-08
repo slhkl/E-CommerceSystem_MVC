@@ -11,7 +11,7 @@ namespace E_CommerceSystem.Validation
             if (product.ProductId <= 0 || productBusiness.Get(product.ProductId) != null)
                 modelState.AddModelError("productId", "Product Id should be special and over 0");
 
-            if (String.IsNullOrEmpty(product.ProductName))
+            if (string.IsNullOrEmpty(product.ProductName))
                 modelState.AddModelError("productName", "Product Name can't to be empty");
 
             if (product.ProductFile == null)
@@ -22,8 +22,9 @@ namespace E_CommerceSystem.Validation
 
             if (!double.TryParse(product.ProductPrice, out double value))
                 modelState.AddModelError("productPrice", "Product price is invalid must be float");
-            //if (productBusiness.Get(cate) == null)
-            //    modelState.AddModelError("categoryId", "There isn't a category please check category id");
+
+            if (new CategoryBusiness().Get(product.CategoryId) == null)
+                modelState.AddModelError("categoryId", "There isn't a category please check category id");
         }
     }
 }

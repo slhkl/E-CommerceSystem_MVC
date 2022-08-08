@@ -11,7 +11,7 @@ namespace Data.Dto
         public string? ProductPrice { get; set; }
         public IFormFile? ProductFile { get; set; }
         public string? ProductImageBase4 { get; set; }
-        public string? CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public DateTime? LastUpdatedTime { get; set; }
     }
 }

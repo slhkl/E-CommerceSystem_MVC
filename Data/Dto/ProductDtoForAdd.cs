@@ -10,6 +10,6 @@ namespace Data.Dto
         public int ProductStock { get; set; }
         public string? ProductPrice { get; set; }
         public IFormFile? ProductFile { get; set; }
-        public string? CategoryId { get; set; }
+        public int CategoryId { get; set; }
     }
 }

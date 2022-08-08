@@ -13,7 +13,7 @@ namespace Data.Models
         public int ProductStock { get; set; }
         public double ProductPrice { get; set; }
         public string? ProductImageBase64 { get; set; }
-        public string? CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public DateTime? LastUpdatedTime { get; set; } = DateTime.Now;
     }
 
