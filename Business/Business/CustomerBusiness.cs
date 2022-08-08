@@ -24,7 +24,7 @@ namespace Business.Business
 
         public Customer Get(string customerId, bool isCustomerId)
         {
-            return _customerService.Get(x => x.CustomerID == customerId);
+            return _customerService.Get(x => x.CustomerId == customerId);
         }
 
         public CustomerDto GetDto(string id)
@@ -33,7 +33,7 @@ namespace Business.Business
             return new CustomerDto()
             {
                 Address = customer.Address,
-                CustomerID = customer.CustomerID,
+                CustomerId = customer.CustomerId,
                 Email = customer.Email,
                 Name = customer.Name,
                 Password = customer.Password,
@@ -45,7 +45,7 @@ namespace Business.Business
         {
             Customer customer = new Customer()
             {
-                CustomerID = customerDto.CustomerID,
+                CustomerId = customerDto.CustomerId,
                 Address = customerDto.Address,
                 Email = customerDto.Email,
                 Name = customerDto.Name,
@@ -57,7 +57,7 @@ namespace Business.Business
 
         public void Update(CustomerDto customerDto)
         {
-            Customer customer = Get(customerDto.CustomerID, true);
+            Customer customer = Get(customerDto.CustomerId, true);
             customer.Address = customerDto.Address;
             customer.Email = customerDto.Email;
             customer.Name = customerDto.Name;

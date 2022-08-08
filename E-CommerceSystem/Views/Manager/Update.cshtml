@@ -1,16 +1,16 @@
 ﻿@using Data.Dto
-@model CustomerDto
+@model ManagerDto
 
 <form method="post">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Update Customer</h2>
+            <h2 class="text-primary">Update Manager</h2>
         </div>
         <div class="mb-3">
-            <label asp-for="CustomerId"></label>
-            <div class="form-control">@Model.CustomerId</div>
-            <input asp-for="CustomerId" style="display:none" class="form-control" />
-            <span asp-validation-for="CustomerId" class="text-danger"></span>
+            <label asp-for="ManagerId"></label>
+            <div class="form-control">@Model.ManagerId</div>
+            <input asp-for="ManagerId" style="display:none" class="form-control" />
+            <span asp-validation-for="ManagerId" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Name"></label>
@@ -27,18 +27,8 @@
             <input asp-for="Password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-         <div class="mb-3">
-            <label asp-for="Address"></label>
-            <input asp-for="Address" class="form-control" />
-            <span asp-validation-for="Address" class="text-danger"></span>
-        </div>
-         <div class="mb-3">
-            <label asp-for="PhoneNumber"></label>
-            <input asp-for="PhoneNumber" class="form-control" />
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-        </div>
         <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
-        <a asp-controller="Customer" asp-action="Index" class="btn btn-secondary" style="width:150px">
+        <a asp-controller="Manager" asp-action="Index" class="btn btn-secondary" style="width:150px">
             Back To List
         </a>
     </div>

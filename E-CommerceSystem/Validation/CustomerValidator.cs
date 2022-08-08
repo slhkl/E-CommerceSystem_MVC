@@ -8,10 +8,10 @@ namespace E_CommerceSystem.Validation
     {
         public static void ValidateCustomerForAdd(CustomerBusiness customerBusiness, CustomerDto customer, ModelStateDictionary modelState)
         {
-            if (customerBusiness.Get(customer.CustomerID, true) != null)
+            if (customerBusiness.Get(customer.CustomerId, true) != null)
                 modelState.AddModelError("customerId", "Customer Id is taken");
 
-            if (string.IsNullOrEmpty(customer.CustomerID))
+            if (string.IsNullOrEmpty(customer.CustomerId))
                 modelState.AddModelError("customerId", "Customer Id can't be empty");
 
             if (string.IsNullOrEmpty(customer.Address))

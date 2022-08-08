@@ -1,5 +1,5 @@
 ﻿@using Data.Models
-@model List<Customer>
+@model List<Manager>
 
 @{
 }
@@ -7,11 +7,11 @@
 <div class="container p3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Customers</h2>
+            <h2 class="text-primary">Managers</h2>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Customer" asp-action="Add" class="btn btn-primary">
-                <i class="bi bi-patch-plus"></i> Add Customer
+            <a asp-controller="Manager" asp-action="Add" class="btn btn-primary">
+                <i class="bi bi-patch-plus"></i> Add Manager
             </a>
         </div>
     </div>
@@ -21,7 +21,7 @@
     <thead>
         <tr>
             <th>
-                Customer Id
+                Manager Id
             </th>
             <th>
                 Name
@@ -33,12 +33,6 @@
                 Password
             </th>
             <th>
-                Address
-            </th>
-            <th>
-                Phone Number
-            </th>
-            <th>
                 Options
             </th>
         </tr>
@@ -48,7 +42,7 @@
         {
             <tr>
                 <td>
-                    @obj.CustomerId
+                    @obj.ManagerId
                 </td>
                 <td>
                     @obj.Name
@@ -60,18 +54,12 @@
                     @obj.Password
                 </td>
                 <td>
-                    @obj.Address
-                </td>
-                <td>
-                    @obj.PhoneNumber
-                </td>
-                <td>
                     <div class="w-70 btn-group" role="group">
-                        <a asp-controller="Customer" asp-action="Update" asp-route-id="@obj.Id"
+                        <a asp-controller="Manager" asp-action="Update" asp-route-id="@obj.Id"
                        class="btn btn-primary mx-2"> <i class="bi bi-pen"></i> Edit</a>
                     </div>
                     <div class="w-70 btn-group" role="group">
-                        <a asp-controller="Customer" asp-action="Delete" asp-route-id="@obj.Id"
+                        <a asp-controller="Manager" asp-action="Delete" asp-route-id="@obj.Id"
                        class="btn btn-danger mx-2"> <i class="bi bi-trash3-fill"></i> Delete</a>
                     </div>
                 </td>
