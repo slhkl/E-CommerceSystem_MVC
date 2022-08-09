@@ -44,6 +44,40 @@ namespace Business.Business
             };
         }
 
+        public List<ProductDtoForShop> GetDtoForShop()
+        {
+            List<ProductDtoForShop> productDtoList = new List<ProductDtoForShop>();
+            foreach(Product product in _productService.GetAll())
+            {
+                productDtoList.Add(new ProductDtoForShop()
+                {
+                    CategoryId = product.CategoryId,
+                    ProductImageBase64 = product.ProductImageBase64,
+                    ProductName = product.ProductName,
+                    ProductPrice = product.ProductPrice,
+                    ProductStock = product.ProductStock,
+                    ProductId = product.ProductId,
+                    ProductDescription = product.ProductDescription
+                });
+            }
+            return productDtoList;
+        }
+
+        public ProductDtoForShop GetDtoForShop(int productId)
+        {
+            Product product = Get(productId);
+            return new ProductDtoForShop()
+            {
+                ProductId = productId,
+                CategoryId = product.CategoryId,
+                ProductImageBase64 = product.ProductImageBase64,
+                ProductName = product.ProductName,
+                ProductPrice = product.ProductPrice,
+                ProductStock = product.ProductStock,
+                ProductDescription = product.ProductDescription
+            };
+        }
+
         public void Add(ProductDtoForAdd productDto)
         {
             Product product = new Product()

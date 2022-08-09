@@ -27,6 +27,21 @@ namespace Business.Business
         {
             return _categoryService.Get(x => x.CategoryId == categoryId);
         }
+        public List<CategoryDto> GetDto()
+        {
+            List<CategoryDto> categoryListDto = new List<CategoryDto>();
+            List<Category> categories = Get();
+            foreach (var item in categories)
+            {
+                categoryListDto.Add(
+                    new CategoryDto()
+                    {
+                        CategoryId = item.CategoryId,
+                        CategoryName = item.CategoryName
+                    });
+            }
+            return categoryListDto;
+        }
 
         public CategoryDto GetDto(string id)
         {
