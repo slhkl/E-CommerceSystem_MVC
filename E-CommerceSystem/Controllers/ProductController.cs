@@ -8,9 +8,12 @@ namespace E_CommerceSystem.Controllers
     public class ProductController : Controller
     {
         ProductBusiness _productBusiness;
+        CartBusiness _cartBusiness;
+
         public ProductController()
         {
             _productBusiness = new ProductBusiness();
+            _cartBusiness = new CartBusiness();
         }
 
         public IActionResult Index()
@@ -49,6 +52,7 @@ namespace E_CommerceSystem.Controllers
         public IActionResult UpdateToDatabase(ProductDtoForUpdate product)
         {
             _productBusiness.Update(product);
+            _cartBusiness.Delete(product.ProductId);
             return RedirectToAction("Index");
         }
 

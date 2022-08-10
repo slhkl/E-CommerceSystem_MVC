@@ -42,13 +42,12 @@ namespace Business.Business
 
         public void Add(ProductDtoForShop product, string customerId)
         {
-            product.ProductStock = 1;
-
             Cart cart = Get(customerId, true);
             if (cart == null)
             {
                 cart = new Cart();
                 cart.CustomerId = customerId;
+                product.ProductStock = 1;
                 cart.ProductList.Add(product);
                 _cartService.Add(cart);
             }
@@ -56,12 +55,16 @@ namespace Business.Business
             {
                 var oldProduct = cart.ProductList.FirstOrDefault(x => x.ProductId == product.ProductId);
                 if (oldProduct == null)
+                {
+                    product.ProductStock = 1;
                     cart.ProductList.Add(product);
-                else
+                    _cartService.Update(x => x.CustomerId == cart.CustomerId, cart);
+                }
+                else if (product.ProductStock > cart.ProductList.FirstOrDefault(x => x.ProductId == product.ProductId).ProductStock)
                 {
                     cart.ProductList.Where(x => x.ProductId == product.ProductId).FirstOrDefault().ProductStock += 1;
+                    _cartService.Update(x => x.CustomerId == cart.CustomerId, cart);
                 }
-                _cartService.Update(x => x.CustomerId == cart.CustomerId, cart);
             }
         }
 
@@ -75,11 +78,26 @@ namespace Business.Business
         public void Delete(int productId, string customerId)
         {
             Cart cart = Get(customerId, true);
+            Delete(cart, productId);
+        }
+
+        public void Delete(int productId)
+        {
+            IEnumerable<Cart> cartList2 = _cartService.GetAll().Where(x => x.ProductList.Any(y => y.ProductId == productId));
+
+            foreach (Cart cart in cartList2)
+            {
+                Delete(cart, productId);
+            }
+        }
+
+        private void Delete(Cart cart, int productId)
+        {
             cart.ProductList.Remove(cart.ProductList.Find(x => x.ProductId == productId));
+            _cartService.Update(x => x.CustomerId == cart.CustomerId, cart);
 
             if (cart.ProductList.Count == 0)
                 _cartService.Delete(x => x.CustomerId == cart.CustomerId);
         }
-
     }
 }
