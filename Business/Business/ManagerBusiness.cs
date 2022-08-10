@@ -40,6 +40,20 @@ namespace Business.Business
             };
         }
 
+        public ManagerDto GetDto(LoginDto loginDto)
+        {
+            Manager manager = _managerService.Get(x => x.Email == loginDto.Email && x.Password == loginDto.Password);
+            if (manager == null)
+                return null;
+            return new ManagerDto()
+            {
+                Name = manager.Name,
+                Email = manager.Email,
+                Password = manager.Password,
+                ManagerId = manager.ManagerId
+            };
+        }
+
         public void Add(ManagerDto managerDto)
         {
             Manager manager = new Manager()

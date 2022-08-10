@@ -57,7 +57,7 @@
                     @obj.Email
                 </td>
                 <td>
-                    @obj.Password
+                    @obj.Password.Replace(obj.Password, "".PadLeft(obj.Password.Length, '*'))
                 </td>
                 <td>
                     @obj.Address

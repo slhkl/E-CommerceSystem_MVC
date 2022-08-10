@@ -1,6 +1,8 @@
-﻿namespace Data.Dto
+﻿using Data.Interface;
+
+namespace Data.Dto
 {
-    public class CustomerDto
+    public class CustomerDto : IUser
     {
         public string? CustomerId { get; set; }
         public string? Name { get; set; }

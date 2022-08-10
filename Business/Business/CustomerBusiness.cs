@@ -41,6 +41,22 @@ namespace Business.Business
             };
         }
 
+        public CustomerDto GetDto(LoginDto loginDto)
+        {
+            Customer customer = _customerService.Get(x => x.Email == loginDto.Email && x.Password == loginDto.Password);
+            if (customer == null)
+                return null;
+            return new CustomerDto()
+            {
+                CustomerId = customer.CustomerId,
+                Password = customer.Password,
+                Email = customer.Email,
+                Address = customer.Address,
+                Name = customer.Name,
+                PhoneNumber = customer.PhoneNumber
+            };
+        }
+
         public void Add(CustomerDto customerDto)
         {
             Customer customer = new Customer()

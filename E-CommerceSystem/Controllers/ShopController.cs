@@ -33,7 +33,7 @@ namespace E_CommerceSystem.Controllers
         [HttpGet, ActionName("Cart")]
         public IActionResult PageContentForCart()
         {
-            var cart = _cartBusiness.GetDto("0");
+            var cart = _cartBusiness.GetDto(HttpContext.Session.GetString("UserId"));
             if (cart == null)
                 return RedirectToAction("Index");
             return View(cart);
@@ -42,14 +42,13 @@ namespace E_CommerceSystem.Controllers
         [HttpGet, ActionName("AddToCart")]
         public IActionResult AddProductToCart(int id)
         {
-            //todo session eklenince düzeltilecek.
-            _cartBusiness.Add(_productBusiness.GetDtoForShop(id), "0");
+            _cartBusiness.Add(_productBusiness.GetDtoForShop(id), HttpContext.Session.GetString("UserId"));
             return RedirectToAction("Cart");
         }
         [HttpGet, ActionName("DeleteFromDatabase")]
         public IActionResult DeleteProductFromDatabase(int id)
         {
-            _cartBusiness.Delete(id, "0");
+            _cartBusiness.Delete(id, HttpContext.Session.GetString("UserId"));
             return RedirectToAction("Cart");
         }
 

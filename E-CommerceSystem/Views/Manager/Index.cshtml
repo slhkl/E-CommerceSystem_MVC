@@ -51,7 +51,7 @@
                     @obj.Email
                 </td>
                 <td>
-                    @obj.Password
+                    @obj.Password.Replace(obj.Password, "".PadLeft(obj.Password.Length, '*'))
                 </td>
                 <td>
                     <div class="w-70 btn-group" role="group">
