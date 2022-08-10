@@ -28,6 +28,9 @@
                             if (this.Context.Session.GetString("SessionType") == "Manager")
                             {
                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Order" asp-action="Index">Order</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Product" asp-action="Index">Product</a>
                                 </li>
                                 <li class="nav-item">
@@ -47,6 +50,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Shop" asp-action="Cart">Cart</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Shop" asp-action="Order">Orders</a>
                                 </li>
                             }
                             <li class="nav-item">

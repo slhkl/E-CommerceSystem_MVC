@@ -10,12 +10,14 @@ namespace E_CommerceSystem.Controllers
         ProductBusiness _productBusiness;
         CategoryBusiness _categoryBusiness;
         CartBusiness _cartBusiness;
+        OrderBusiness _orderBusiness;
 
         public ShopController()
         {
             _productBusiness = new ProductBusiness();
             _categoryBusiness = new CategoryBusiness();
             _cartBusiness = new CartBusiness();
+            _orderBusiness = new OrderBusiness();
         }
 
         public IActionResult Index()
@@ -52,5 +54,17 @@ namespace E_CommerceSystem.Controllers
             return RedirectToAction("Cart");
         }
 
+        [HttpGet, ActionName("Buy")]
+        public IActionResult BuyNow()
+        {
+            _orderBusiness.Add(HttpContext.Session.GetString("UserId"));
+            return RedirectToAction("Order");
+        }
+
+        [HttpGet, ActionName("Order")]
+        public IActionResult GetOrdersFromDatabase()
+        {
+            return View(_orderBusiness.GetDto(HttpContext.Session.GetString("UserId")));
+        }
     }
 }

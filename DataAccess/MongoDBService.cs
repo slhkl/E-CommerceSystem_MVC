@@ -14,11 +14,9 @@ namespace MongoDB
         }
 
         public List<T> GetAll() => _mongoCollection.Find(_ => true).ToList();
-
+        public List<T> GetAll(Expression<Func<T, bool>> filter) => _mongoCollection.Find(filter).ToList();
         public T Get(Expression<Func<T, bool>> filter) => _mongoCollection.Find(filter).FirstOrDefault();
-
         public void Add(T model) => _mongoCollection.InsertOne(model);
-
         public void Update(Expression<Func<T, bool>> filter, T model) => _mongoCollection.FindOneAndReplace(filter, model);
         public void Delete(Expression<Func<T, bool>> filter) => _mongoCollection.FindOneAndDelete(filter);
     }
