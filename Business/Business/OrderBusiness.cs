@@ -10,11 +10,13 @@ namespace Business.Business
     {
         MongoDBService<Order> _orderService;
         MongoDBService<Cart> _cartService;
+        MongoDBService<Product> _productService;
 
         public OrderBusiness()
         {
             _orderService = new MongoDBService<Order>();
             _cartService = new MongoDBService<Cart>();
+            _productService = new MongoDBService<Product>();
         }
 
         public List<Order> Get()
@@ -93,6 +95,12 @@ namespace Business.Business
                 OrderId = Guid.NewGuid().ToString()
             });
             _cartService.Delete(x => x.CustomerId == customerId);
+            foreach (var obj in cart.ProductList)
+            {
+                Product product = _productService.Get(x => x.ProductId == obj.ProductId);
+                product.ProductStock -= obj.ProductStock;
+                _productService.Update(x => x.ProductId == product.ProductId, product);
+            }
         }
 
         public void Update(string orderId, OrderStatus orderStatus)
